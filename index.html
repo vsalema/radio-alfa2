@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang='en' class=''>
+
+<head>
+
+  <meta charset='UTF-8'>
+  <title>radio alfa</title>
+
+  <meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <style id="INLINE_PEN_STYLESHEET_ID">
+    @charset "UTF-8";
+*, *::before, *::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 28px;
+  background-color: #26282B;
+}
+
+.btn {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 50px;
+  background-color: #050606;
+  background-image: linear-gradient(120deg, #47494B 0%, #18191D 100%);
+  color: #84878A;
+  text-align: center;
+  border-style: solid;
+  border-color: #2f3139;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 600;
+  text-align: center;
+}
+.btn::before {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.btn--big {
+  font-size: 1.1rem;
+  height: 80px;
+  width: 80px;
+  border-width: 3px;
+  line-height: 1;
+  box-shadow: -3px -3px 20px #5b5b5b, 5px 5px 20px #050606;
+}
+.btn--big:active, .btn--big.active {
+  box-shadow: inset 10px 10px 20px rgba(209, 19, 2, 0.5), -3px -3px 20px #5b5b5b, 5px 5px 20px #050606;
+}
+.btn--small {
+  box-shadow: -3px -3px 15px #6a6a6a, 3px 3px 15px #050606;
+  font-size: 0.8rem;
+  height: 50px;
+  width: 50px;
+  border-width: 2px;
+  line-height: 1;
+}
+.btn--small:active, .btn--small.active {
+  box-shadow: inset 10px 10px 20px rgba(209, 19, 2, 0.5), -3px -3px 15px #6a6a6a, 3px 3px 15px #050606;
+}
+.btn--xs {
+  box-shadow: -3px -3px 15px #6a6a6a, 3px 3px 15px #050606;
+  font-size: 0.6rem;
+  height: 40px;
+  width: 40px;
+  border-width: 2px;
+  line-height: 1;
+}
+.btn--xs:active, .btn--xs.active {
+  box-shadow: inset 10px 10px 20px rgba(209, 19, 2, 0.5), -3px -3px 15px #6a6a6a, 3px 3px 15px #050606;
+}
+.btn:active, .btn.active {
+  border-color: #E8550C;
+  background-image: linear-gradient(120deg, #E8550C 0%, #f47333 100%);
+  color: #fff;
+}
+.btn.play::before {
+  content: "";
+  left: 50%;
+}
+.btn.play.pause {
+  border-color: #E8550C;
+  background-image: linear-gradient(120deg, #E8550C 0%, #f47333 100%);
+  color: #fff;
+  box-shadow: inset 10px 10px 20px rgba(209, 19, 2, 0.5), -3px -3px 20px #5b5b5b, 5px 5px 20px #050606;
+}
+.btn.play.pause::before {
+  content: "";
+  left: 50%;
+}
+.btn.pause::before {
+  content: "";
+  left: 50%;
+}
+.btn.dots::before {
+  content: "";
+  left: 50%;
+}
+.btn.playlist::before {
+  content: "";
+  left: 50%;
+}
+.btn.playlist.isactive {
+  border-color: #E8550C;
+  background-image: linear-gradient(120deg, #E8550C 0%, #f47333 100%);
+  color: #fff;
+  box-shadow: inset 10px 10px 20px rgba(209, 19, 2, 0.5), -3px -3px 20px #5b5b5b, 5px 5px 20px #050606;
+}
+.btn.playlist.isactive::before {
+  content: "";
+}
+.btn.heart::before {
+  content: "";
+  left: 49%;
+}
+.btn.prev {
+  margin-right: 20px;
+}
+.btn.prev::before {
+  content: "";
+  left: 48%;
+}
+.btn.next {
+  margin-left: 20px;
+}
+.btn.next::before {
+  content: "";
+  left: 50%;
+}
+.btn.back::before {
+  content: "";
+  left: 48%;
+}
+
+.app {
+  overflow: hidden;
+  position: relative;
+  max-width: 400px;
+  min-height: 875px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: linear-gradient(#343A3F 0%, #232528 100%);
+  border: 1px solid #393b3c;
+  border-radius: 50px;
+  box-shadow: 5px 5px 35px #18191D;
+}
+.app__head {
+  justify-content: space-between;
+  padding: 35px 35px 0;
+}
+.app__body {
+  margin: 30px 0 50px;
+  flex-direction: column;
+  padding: 0 35px 0 35px;
+}
+.app__footer {
+  justify-content: center;
+  margin-bottom: 40px;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+.app__footer.isactive {
+  opacity: 0;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+}
+
+.album {
+  align-self: center;
+  margin-bottom: 50px;
+}
+.album__img {
+  overflow: hidden;
+  height: 300px;
+  width: 300px;
+  transition: all 0.25s ease;
+  border: 10px solid #18191D;
+  border-radius: 100%;
+  transform-origin: top center;
+  box-shadow: -5px -5px 25px #444444, 5px 5px 25px #050606;
+  background-image: url("https://sun9-2.userapi.com/c830709/v830709453/17f58c/vPCov8kW6Ns.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.album__img.isactive {
+  transform: scale(0.5);
+}
+.album__info {
+  margin-top: 50px;
+  text-align: center;
+  color: #A7A8AA;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+.album__info.isactive {
+  opacity: 0;
+}
+.album__info-name {
+  font-size: 36px;
+  padding-bottom: 10px;
+}
+.album__info-track {
+  padding-top: 5px;
+  font-size: 16px;
+}
+
+.progress {
+  position: relative;
+  margin-bottom: 30px;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+.progress.isactive {
+  opacity: 0;
+}
+.progress__count {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #6a6a6a;
+}
+.progress__bar {
+  position: relative;
+  margin-top: 25px;
+  border-radius: 50px;
+  width: 100%;
+  height: 8px;
+  background-color: #24252b;
+  cursor: pointer;
+}
+.progress__bar::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 2px solid #6a6a6a;
+  border-left: 2px solid #6a6a6a;
+  border-right: 1px solid #6a6a6a;
+  z-index: 1;
+  border-radius: 50px;
+  box-shadow: inset 5px 3px 5px #000;
+}
+.progress__bar-current {
+  transition: all 0.25s ease;
+  position: absolute;
+  background-image: linear-gradient(45deg, #D11302 0%, #f9ca24 100%);
+  height: calc(100% - 2px);
+  width: 0%;
+  z-index: 3;
+  bottom: 1px;
+  left: 2px;
+  border-radius: 50px;
+  box-shadow: inset 0px 2px 3px rgba(24, 25, 29, 0.5);
+}
+.progress__bar-pin {
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
+  position: absolute;
+  left: 0%;
+  transition: all 0.25s ease;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background-image: linear-gradient(120deg, #47494B 0%, #18191D 100%);
+  box-shadow: -5px -5px 15px #444444, 3px 3px 15px #050606, inset -3px -3px 5px #18191D;
+}
+.progress__bar-pin::after {
+  content: "";
+  position: absolute;
+  border-radius: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 35%;
+  width: 35%;
+  background-color: #f9ca24;
+  box-shadow: -5px -5px 12px #18191D, 5px 5px 12px #6a6a6a, inset 2px 2px 5px #777777;
+}
+
+.tracks {
+  position: absolute;
+  max-height: 600px;
+  height: 100%;
+  list-style-type: none;
+  overflow: hidden;
+  left: 0;
+  width: 100%;
+  padding: 20px 20px 0 20px;
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  bottom: -100%;
+  transition: bottom 0.25s ease;
+}
+.tracks.isactive {
+  z-index: 10;
+  -webkit-animation: bounce 0.5s ease forwards alternate;
+          animation: bounce 0.5s ease forwards alternate;
+}
+.tracks__list {
+  padding-top: 20px;
+  position: relative;
+  top: 0;
+  overflow-y: auto;
+  height: 100%;
+  width: calc(100% + 40px);
+  padding-bottom: 20px;
+}
+.tracks__item {
+  color: #A7A8AA;
+  width: calc(100% - 20px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-radius: 20px;
+  transition: all 0.5s ease;
+  border: 1px solid transparent;
+}
+.tracks__item.isactive {
+  background-color: #1a1b20;
+  border-bottom: 1px solid #18191D;
+  border-top: 1px solid #373737;
+  border-right: 1px solid #373737;
+  box-shadow: inset 0 -25px 25px #24252b;
+}
+.tracks__info {
+  display: flex;
+  flex-direction: column;
+}
+.tracks__info-artist {
+  font-size: 18px;
+  padding-bottom: 5px;
+}
+.tracks__info-name {
+  font-size: 14px;
+}
+
+@-webkit-keyframes bounce {
+  0% {
+    bottom: -100%;
+  }
+  50% {
+    bottom: 3%;
+  }
+  100% {
+    bottom: 0%;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    bottom: -100%;
+  }
+  50% {
+    bottom: 3%;
+  }
+  100% {
+    bottom: 0%;
+  }
+}
+  </style>
+</head>
+
+<body>
+  
+<div class="app" id="app">
+  <div class="tracks" :class="{isactive: isPlaylistActive}">
+    <ul class="tracks__list">
+      <li class="tracks__item" v-for="(item,index) in musicPlaylist" :class="{isactive: isCurrentSong(index)}">
+        <div class="tracks__info">
+          <h3 class="tracks__info-artist">{{item.artist}}</h3><span class="tracks__info-name">{{ item.title }}</span>
+        </div>
+        <button class="btn play btn--xs" @click="changeSong(index)" :class="{pause: isCurrentSong(index)}"></button>
+      </li>
+    </ul>
+  </div>
+  <div class="row app__head">
+    <button class="btn btn--small back"></button>
+    <button class="btn btn--small playlist" @click="togglePlaylist" :class="{isactive: isPlaylistActive}"></button>
+  </div>
+  <div class="row app__body">
+    <div class="album">
+      <div class="album__img" @load="onImageLoaded" :style="{ backgroundImage: `url(${musicPlaylist[currentSong].image})` }" :class="{isactive: isPlaylistActive}" :key="currentSong" ondragstart="return false"></div>
+      <div class="album__info" :class="{isactive: isPlaylistActive}">
+        <h3 class="album__info-name" :key="currentSong">{{ musicPlaylist[currentSong].artist }}</h3>
+        <p class="album__info-track" :key="currentSong">{{ musicPlaylist[currentSong].title }}</p>
+      </div>
+    </div>
+    <div class="progress" ref="progress" :class="{isactive: isPlaylistActive}">
+      <div class="progress__count"><span>{{ currentTime | fancyTimeFormat }}</span><span>{{ trackDuration | fancyTimeFormat }}</span></div>
+      <div class="progress__bar">
+        <div class="progress__bar-current" :style="{ width: currentProgressBar + '%' }"></div>
+        <div class="progress__bar-pin" :style="{ left: currentProgressBar + '%' }"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row app__footer" :class="{isactive: isPlaylistActive}">
+    <button class="btn prev btn--big" @click="prevSong"></button>
+    <button class="btn play btn--big" @click="playAudio" :class="{pause: currentlyPlaying}"></button>
+    <button class="btn next btn--big" @click="nextSong"></button>
+  </div>
+</div>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+  <script>
+  
+  var app = new Vue({
+	el: "#app",
+	data: {
+		audio: "",
+		imgLoaded: false,
+		currentlyPlaying: false,
+		currentlyStopped: false,
+		currentTime: 0,
+		checkingCurrentPositionInTrack: "",
+		trackDuration: 0,
+		currentProgressBar: 0,
+		isPlaylistActive: false,
+		currentSong: 0,
+		debug: false,
+		musicPlaylist: [
+        {
+          title: "Radio Alfa",
+          artist: "RA",
+          image: "https://radioalfa.net/wp-content/uploads/2023/04/IMG-20230421-WA0006-696x928.jpg",
+          url: "https://n16a-eu.rcs.revma.com/amrbkhqtkm0uv?rj-ttl=5&rj-tok=AAABjyZZV10A8pNBeIWHkkzM-w",
+        },
+				{
+          title: "Sonhos de menino",
+          artist: "Tony Carreira",
+          image: "https://lastfm.freetls.fastly.net/i/u/500x500/b3d16a7378c34c4da56373293c35b8fa.jpg",
+          url: "https://cs1.mp3.pm/listen/1075704/dnlqcUN6QkhVS3R6UzJFVTkra1g4alNEZDdVNmtFRXlqY3o1amlVcmtLVjdSVEE2N3M2ODUzbVR3bUpDeTk1VnZNOXM0U2F0b0JXdUl3WC9vYnJ1a0prZ1UxMWVBdkxzNENEblNtOG1nYWZHcll1TlRmb0VuZEZUTjhmWUZTSVU/Tony_Carreira_-_Sonhos_De_Menino_(mp3.pm).mp3",
+        },
+        {
+          title: "Diz-me",
+          artist: "Tony Carreira",
+          image: "https://infocul.pt/wp-content/uploads/2022/02/Tony-Carreira-Diz-Me-1024x1024.jpg",
+          url: "https://cs1.mp3.pm/listen/196619481/dnlqcUN6QkhVS3R6UzJFVTkra1g4alNEZDdVNmtFRXlqY3o1amlVcmtLWC9KOCtQTjByTHFLK3dMb0xDRzR3a0REaWc1SjloNTNyWGhVc2lwYlBLUGRPNEFCQW5TTitaNHdzeGhmelUxQmxINFB5SmxvdUt0VTZxOG1IRTVPM1o/Tony_Carreira_-_Diz-me_(mp3.pm).mp3",
+        },
+
+        {
+          title: "Depois de Ti (mais nada)",
+          artist: "Tony Carreira",
+          image: "https://i.ytimg.com/vi/EkY80ScUCCc/maxresdefault.jpg",
+          url: "https://cs1.mp3.pm/listen/2786803/dnlqcUN6QkhVS3R6UzJFVTkra1g4alNEZDdVNmtFRXlqY3o1amlVcmtLV0VpZGhJU1p3QUJvcUFxOFhxR3QzaDdSSFk3SEJ6c2lpZTVUamRtTkdzSHFPajlIVUNJbjEzanJDelgycFRGQ2RVNWZjZWdwdnpSNkJwZEcxNlRZMnU/Tony_Carreira_-_Depois_de_Ti_mais_nada_(mp3.pm).mp3",
+        },
+        {
+          title: "The Final Victory",
+          artist: "Haggard",
+          image: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/5.jpg",
+          url: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/5.mp3",
+        },
+        {
+          title: "The Comeback Kid",
+          artist: "Lindi Ortega",
+          image: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/7.jpg",
+          url: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/7.mp3",
+        },
+        {
+          title: "Overdose",
+          artist: "Grandson",
+          image: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/8.jpg",
+          url: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/8.mp3",
+        },
+				{
+          title: "Mekanın Sahibi",
+          artist: "Norm Ender",
+          image: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/1.jpg",
+          url: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/1.mp3",
+        },
+        {
+          title: "Rag'n'Bone Man",
+          artist: "Human",
+          image: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/9.jpg",
+          url: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/9.mp3",
+        }
+		],
+		audioFile: ""
+	},
+	mounted: function() {
+		this.changeSong();
+		this.audio.loop = false;
+	},
+	filters: {
+		fancyTimeFormat: function(s) {
+			return (s - (s %= 60)) / 60 + (9 < s ? ":" : ":0") + s;
+		}
+	},
+	methods: {
+		togglePlaylist: function() {
+			this.isPlaylistActive = !this.isPlaylistActive;
+		},
+		nextSong: function() {
+			if (this.currentSong < this.musicPlaylist.length - 1)
+				this.changeSong(this.currentSong + 1);
+		},
+		prevSong: function() {
+			if (this.currentSong > 0) this.changeSong(this.currentSong - 1);
+		},
+		changeSong: function(index) {
+			var wasPlaying = this.currentlyPlaying;
+			this.imageLoaded = false;
+			if (index !== undefined) {
+				this.stopAudio();
+				this.currentSong = index;
+			}
+			this.audioFile = this.musicPlaylist[this.currentSong].url;
+			this.audio = new Audio(this.audioFile);
+			var localThis = this;
+			this.audio.addEventListener("loadedmetadata", function() {
+				localThis.trackDuration = Math.round(this.duration);
+			});
+			this.audio.addEventListener("ended", this.handleEnded);
+			if (wasPlaying) {
+				this.playAudio();
+			}
+		},
+		isCurrentSong: function(index) {
+			if (this.currentSong == index) {
+				return true;
+			}
+			return false;
+		},
+		getCurrentSong: function(currentSong) {
+			return this.musicPlaylist[currentSong].url;
+		},
+		playAudio: function() {
+			if (
+				this.currentlyStopped == true &&
+				this.currentSong + 1 == this.musicPlaylist.length
+			) {
+				this.currentSong = 0;
+				this.changeSong();
+			}
+			if (!this.currentlyPlaying) {
+				this.getCurrentTimeEverySecond(true);
+				this.currentlyPlaying = true;
+				this.audio.play();
+			} else {
+				this.stopAudio();
+			}
+			this.currentlyStopped = false;
+		},
+		stopAudio: function() {
+			this.audio.pause();
+			this.currentlyPlaying = false;
+			this.pausedMusic();
+		},
+		handleEnded: function() {
+			if (this.currentSong + 1 == this.musicPlaylist.length) {
+				this.stopAudio();
+				this.currentlyPlaying = false;
+				this.currentlyStopped = true;
+			} else {
+				this.currentlyPlaying = false;
+				this.currentSong++;
+				this.changeSong();
+				this.playAudio();
+			}
+		},
+		onImageLoaded: function() {
+			this.imgLoaded = true;
+		},
+		getCurrentTimeEverySecond: function(startStop) {
+			var localThis = this;
+			this.checkingCurrentPositionInTrack = setTimeout(
+				function() {
+					localThis.currentTime = localThis.audio.currentTime;
+					localThis.currentProgressBar =
+						localThis.audio.currentTime / localThis.trackDuration * 100;
+					localThis.getCurrentTimeEverySecond(true);
+				}.bind(this),
+				1000
+			);
+		},
+		pausedMusic: function() {
+			clearTimeout(this.checkingCurrentPositionInTrack);
+		},
+		toggleDebug: function(){
+			this.debug=!this.debug;
+			document.body.classList.toggle('debug');
+		}
+	},
+	watch: {
+		currentTime: function() {
+			this.currentTime = Math.round(this.currentTime);
+		}
+	},
+	beforeDestroy: function() {
+		this.audio.removeEventListener("ended", this.handleEnded);
+		this.audio.removeEventListener("loadedmetadata", this.handleEnded);
+
+		clearTimeout(this.checkingCurrentPositionInTrack);
+	}
+});
+  
+  </script>
+</body>
+
+</html>
